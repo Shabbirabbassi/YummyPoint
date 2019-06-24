@@ -29,10 +29,10 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        editphone =(EditText) findViewById(R.id.edt_phone);
-        editpassword= (EditText) findViewById(R.id.edt_password);
-        register_button= (TextView) findViewById(R.id.button_SignUp);
-        btnSignIn= (Button) findViewById(R.id.button_SignIn);
+        editphone = findViewById(R.id.edt_phone);
+        editpassword= findViewById(R.id.edt_password);
+        register_button= findViewById(R.id.button_SignUp);
+        btnSignIn= findViewById(R.id.button_SignIn);
         register_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +57,7 @@ public class SignIn extends AppCompatActivity {
                         //check if user is not exist in database
                         if(editpassword.getText().toString().equals("") && editphone.getText().toString().equals("")) {
                             mdialog.dismiss();
-                            Toast.makeText(SignIn.this, "Please fill the forms", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignIn.this, "Please Enter Phone No & Password", Toast.LENGTH_SHORT).show();
                         }else{
                             if (dataSnapshot.child(editphone.getText().toString()).exists()) {
                                 mdialog.dismiss();

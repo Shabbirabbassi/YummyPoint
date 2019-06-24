@@ -42,8 +42,6 @@ public class Home extends AppCompatActivity
 
     RecyclerView recycler_menu;
     RecyclerView.LayoutManager layoutManager;
-
-    RelativeLayout slide;
     FirebaseRecyclerAdapter <Category,MenuViewHolder> adapter;
     String isGuest = "";
 
@@ -54,8 +52,6 @@ public class Home extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Menu");
         setSupportActionBar(toolbar);
-
-
 
         //Initialize Firebase
 
@@ -108,7 +104,6 @@ public class Home extends AppCompatActivity
         recycler_menu = (RecyclerView) findViewById(R.id.recycler_view);
         recycler_menu.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
-        layoutManager = new LinearLayoutManager(this);
         recycler_menu.setLayoutManager(layoutManager);
 
 
@@ -122,7 +117,7 @@ private void loadMenu(){
             protected void populateViewHolder(MenuViewHolder viewHolder, Category model, int position) {
            viewHolder.txtMenuName.setText(model.getName());
            Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.iv_items);
-           String image = model.getImage();
+           //String image = model.getImage();
            final Category clickItem = model;
            viewHolder.setItemClickListener(new ItemClickListener() {
                @Override
@@ -183,7 +178,7 @@ private void loadMenu(){
             // Handle the camera action
 
             if(isGuest.equals("Guest")){
-                Toast.makeText(this, "You Are A GUEST", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please SignIn", Toast.LENGTH_SHORT).show();
             }else{
                 startActivity(new Intent(Home.this, MyAccount.class));
             }

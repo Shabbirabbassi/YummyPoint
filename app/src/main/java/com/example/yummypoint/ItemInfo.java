@@ -36,6 +36,7 @@ public class ItemInfo extends AppCompatActivity {
         mImage = findViewById(R.id.info_image);
         mCart = findViewById(R.id.add_to_cart);
         mBuy = findViewById(R.id.buy_now);
+
         if(getIntent()!=null)
         {
             name=getIntent().getStringExtra("Name");

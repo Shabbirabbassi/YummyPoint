@@ -33,14 +33,14 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        editName=(MaterialEditText) findViewById(R.id.edt_name);
+        editName= findViewById(R.id.edt_name);
 
-        editPassword=(MaterialEditText) findViewById(R.id.edt_password);
+        editPassword= findViewById(R.id.edt_password);
 
-        editphone=(MaterialEditText) findViewById(R.id.edt_phone);
-        editEmail =(MaterialEditText) findViewById(R.id.edt_email);
+        editphone= findViewById(R.id.edt_phone);
+        editEmail = findViewById(R.id.edt_email);
 
-        btnSignUp = (Button) findViewById(R.id.button_SignUp);
+        btnSignUp = findViewById(R.id.button_SignUp);
 
 
 
@@ -52,7 +52,7 @@ public class SignUp extends AppCompatActivity {
                     loadData();
                 }else{
                     if(editphone.getText().length() < editphone.getMinCharacters()) {
-                        Toast.makeText(SignUp.this, "Phone No Must Be 11 characters long", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignUp.this, "Phone No must 11 digits long", Toast.LENGTH_LONG).show();
                     }else if(editPassword.getText().length() < editPassword.getMinCharacters()){
                         Toast.makeText(SignUp.this, "Password Must Be 8 characters long", Toast.LENGTH_LONG).show();
                     }else if(!isEmailValid(editEmail.getText().toString())){
@@ -86,7 +86,7 @@ public class SignUp extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // check if already user phone exist
                 if (dataSnapshot.child(editphone.getText().toString()).exists()) {
-                    Toast.makeText(SignUp.this, "Already registered on this no", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, "Already registered on this phone no", Toast.LENGTH_SHORT).show();
                     mdialog.dismiss();
 
                 } else {
@@ -121,9 +121,6 @@ public class SignUp extends AppCompatActivity {
             Pattern pattern = Pattern.compile(regExpn,Pattern.CASE_INSENSITIVE);
             Matcher matcher = pattern.matcher(inputStr);
 
-            if(matcher.matches())
-                return true;
-            else
-                return false;
+            return matcher.matches();
         }
 }

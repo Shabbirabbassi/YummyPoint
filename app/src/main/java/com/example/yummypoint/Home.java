@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.yummypoint.Common.Common;
 import com.example.yummypoint.Interface.ItemClickListener;
 import com.example.yummypoint.Model.Category;
+import com.example.yummypoint.Model.User;
 import com.example.yummypoint.ViewHolder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.github.paolorotolo.appintro.AppIntro;
@@ -49,7 +50,7 @@ public class Home extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Menu");
         setSupportActionBar(toolbar);
 
@@ -59,7 +60,7 @@ public class Home extends AppCompatActivity
         category = database.getReference("Category");
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,13 +73,13 @@ public class Home extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         //Set Name for User
@@ -87,21 +88,21 @@ public class Home extends AppCompatActivity
 
         if(UserName.equals("User")) {
             View headerView = navigationView.getHeaderView(0);
-            txtFullName = (TextView) headerView.findViewById(R.id.txtFullName);
+            txtFullName = headerView.findViewById(R.id.txtFullName);
             txtFullName.setText(Common.currentUser.getName());
-            textView = (TextView) headerView.findViewById(R.id.textView);
+            textView = headerView.findViewById(R.id.textView);
             textView.setText(Common.currentUser.getEmail());
         }else {
             View headerView = navigationView.getHeaderView(0);
-            txtFullName = (TextView) headerView.findViewById(R.id.txtFullName);
+            txtFullName = headerView.findViewById(R.id.txtFullName);
             txtFullName.setText(getIntent().getStringExtra("UserName"));
             isGuest = getIntent().getStringExtra("UserName");
-            textView = (TextView) headerView.findViewById(R.id.textView);
+            textView = headerView.findViewById(R.id.textView);
             textView.setText("");
 
         }
         //Load Menu
-        recycler_menu = (RecyclerView) findViewById(R.id.recycler_view);
+        recycler_menu = findViewById(R.id.recycler_view);
         recycler_menu.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recycler_menu.setLayoutManager(layoutManager);
@@ -138,7 +139,7 @@ private void loadMenu(){
 }
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -203,9 +204,12 @@ private void loadMenu(){
         } else if (id == R.id.nav_about) {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.yummypointbakery.com/about.php"));
             startActivity(intent);
+        } else if(id == R.id.nav_Api){
+            Intent intent = new Intent(Home.this, Users.class);
+            startActivity(intent);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
